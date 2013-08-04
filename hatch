@@ -23,6 +23,9 @@ def show_help():
 def init():
     url = input('Remote repository url: ')
     git.remote('set-url', 'origin', url)
+    print('Clearing repository history')
+    git('update-ref', '-d', 'refs/heads/master')
+    git.commit('-s', '-m', 'Initial import')
     print('Pushing master to remote')
     git.push('-u', 'origin', 'master')
     git.checkout('-b', 'run-codegen')
