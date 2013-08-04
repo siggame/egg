@@ -62,6 +62,10 @@ def update():
     git.checkout('master')
     print('Merging changes into master')
     git.merge('run-codegen', '--no-commit', '--no-ff')
+    print('Merge complete.')
+    print('Review changes, edit and git-add as needed')
+    print("Run `./hatch commit` when you're happy with the changes.")
+    print('Run `./hatch cancel` if you want to cancel the update.')
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -72,6 +76,8 @@ if __name__ == '__main__':
         update()
     elif sys.argv[1] == 'cancel':
         cancel()
+    elif sys.argv[1] == 'commit':
+        commit()
     else:
         show_help()
 
