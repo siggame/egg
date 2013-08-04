@@ -21,8 +21,10 @@ def show_help():
 def init():
     url = input('Remote repository url: ')
     git.remote('set-url', 'origin', url)
+    print('Pushing master to remote')
     git.push('-u', 'origin', 'master')
     git.checkout('-b', 'run-codegen')
+    print('Pushing run-codegen to remote')
     git.push('-u', 'origin', 'run-codegen')
     git.checkout('master')
 
