@@ -17,6 +17,7 @@ def show_help():
     print('Commands:')
     print('init\t\t-- initialize the repository')
     print('update\t\t-- update after component of data.yaml change')
+    print('cancel\t\t-- cancel an in-progress update')
 
 def init():
     url = input('Remote repository url: ')
@@ -26,6 +27,12 @@ def init():
     git.checkout('-b', 'run-codegen')
     print('Pushing run-codegen to remote')
     git.push('-u', 'origin', 'run-codegen')
+    git.checkout('master')
+
+def cancel():
+    git.reset('--hard')
+    git.checkout('run-codegen')
+    git.reset('--hard', 'origin/run-codegen')
     git.checkout('master')
 
 def update():
@@ -51,6 +58,8 @@ if __name__ == '__main__':
         init()
     elif sys.argv[1] == 'update':
         update()
+    elif sys.argv[1] == 'cancel':
+        cancel()
     else:
         show_help()
 
