@@ -1,11 +1,6 @@
-import yaml
 import shutil
 from sh import git
-
-try:
-    from yaml import CLoader as Loader
-except ImportError:
-    from yaml import Loader
+from config_reader import read_config
 
 def grab(data, name):
     if 'type' not in data:
@@ -18,25 +13,24 @@ def grab(data, name):
         git.clone(data['location'], dest)
 
 def grab_components(location = 'components.yaml'):
-        f = open(location)
-        data = yaml.load(f, Loader)
-        if 'codegen' not in data:
-            raise KeyError('codegen not defined in data.yaml')
+    data = read_config(location)
+    if 'codegen' not in data:
+        raise KeyError('codegen not defined in data.yaml')
 
-        try:
-            shutil.rmtree('.components')
-        except OSError:
-            #Don't worry if the directory doesn't exist
-            pass
+    try:
+        shutil.rmtree('.components')
+    except OSError:
+        #Don't worry if the directory doesn't exist
+        pass
 
-        codegen = data.get('codegen')
-        components = data.get('components', {})
-        templates = data.get('templates', {})
+    codegen = data.get('codegen')
+    components = data.get('components', {})
+    templates = data.get('templates', {})
 
-        grab(data['codegen'], 'codegen')
-        for key, value in components.items():
-            grab(value, key)
-        for key, value in templates.items():
-            grab(value, key)
+    grab(codegen, 'codegen')
+    for key, value in components.items():
+        grab(value, key)
+    for key, value in templates.items():
+        grab(value, key)
 
 
