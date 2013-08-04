@@ -5,7 +5,7 @@ codegen:
 components:
     server:
         type: git
-        location: https://github.com/siggame/codegen.git
+        location: https://github.com/siggame/server.git
         destination: server
 
 templates:
