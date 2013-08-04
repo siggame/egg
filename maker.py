@@ -10,6 +10,11 @@ def make_component(name, destination):
         pass
     source = '.components/%s' % name
     shutil.copytree(source, destination)
+    try:
+        shutil.rmtree(destination + '/.git')
+    except OSError:
+        #It's fine if it doesn't exist already
+        pass
 
 def make_template(name, destination):
     try:
