@@ -61,7 +61,7 @@ def update():
     git.commit(message='codegen rerun')
     git.checkout('master')
     print('Merging changes into master')
-    git.merge('run-codegen', '--no-commit')
+    git.merge('run-codegen', '--no-commit', '--no-ff')
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
