@@ -40,7 +40,7 @@ def cancel():
     git.checkout('master')
 
 def commit():
-    git.commit(message='codegen rerun')
+    git.commit(message='merged run-codegen')
     print('pushing new master')
     git.push()
     git.checkout('run-codegen')
