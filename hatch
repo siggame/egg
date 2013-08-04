@@ -18,6 +18,7 @@ def show_help():
     print('init\t\t-- initialize the repository')
     print('update\t\t-- update after component of data.yaml change')
     print('cancel\t\t-- cancel an in-progress update')
+    print('commit\t\t-- commit and push an in-progress update')
 
 def init():
     url = input('Remote repository url: ')
@@ -35,6 +36,15 @@ def cancel():
     git.reset('--hard', 'origin/run-codegen')
     git.checkout('master')
 
+def commit():
+    git.commit(message='codegen rerun')
+    print('pushing new master')
+    git.push()
+    git.checkout('run-codegen')
+    print('pushing new run-codegen')
+    git.push()
+    git.checkout('master')
+
 def update():
     try:
         git.show('master:data.yaml', _tty_out=False)
@@ -47,7 +57,7 @@ def update():
 
     maker.make_all()
     git.add('-A')
-    git.commit(message = 'codegen rerun')
+    git.commit(message='codegen rerun')
     git.checkout('master')
     git.merge('run-codegen', '--no-commit')
 
