@@ -1,0 +1,16 @@
+codegen:
+    type: git
+    location: https://github.com/siggame/codegen.git
+
+components:
+    server:
+        type: git
+        location: https://github.com/siggame/codegen.git
+        destination: server
+
+templates:
+    server-templates:
+        type: git
+        location: https://github.com/siggame/server-templates.git
+        destination: server/plugins
+
