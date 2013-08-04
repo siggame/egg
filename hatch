@@ -56,9 +56,11 @@ def update():
     git.checkout('master', '--', 'data.yaml')
 
     maker.make_all()
+    print('Committing changes to run-codegen')
     git.add('-A')
     git.commit(message='codegen rerun')
     git.checkout('master')
+    print('Merging changes into master')
     git.merge('run-codegen', '--no-commit')
 
 if __name__ == '__main__':
