@@ -10,7 +10,7 @@ globals:
         type: int
         doc: How many turns it has been since the beginning of the game
     game_name:
-        type: string
+        type: str
         doc: The name of this match on the server
     player_id:
         type: int
